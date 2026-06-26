@@ -1,7 +1,7 @@
 import { globalStyles } from '@/styles/global';
 import { Link } from 'expo-router';
 import { ScrollView, Text } from 'react-native';
-import HomeHeader from '../components/HomeHeader';
+import HomeHeader from '../../components/HomeHeader';
 
 export default function HomeScreen() {
   return (
