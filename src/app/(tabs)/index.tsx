@@ -33,6 +33,7 @@ export default function HomeScreen() {
       <HomeHeader />
       <MacroGrid meals={meals}/>
       <CopyButton meals={meals} />
+      {/* <ReminderToggle /> */}
       <RecentMeals meals={meals} onDelete={loadMeals} />
     </ScrollView>
   );
