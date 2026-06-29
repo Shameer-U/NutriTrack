@@ -10,24 +10,25 @@ import { ScrollView, Text } from 'react-native';
 export default function HomeScreen() {
   const [meals, setMeals] = useState<Meal[]>([]);
 
-  const loadMeals = useCallback(() => {
-      return async () => {
-      const data = await getMeals();
-      setMeals(data);
-      console.log('Loaded meals:', data);
-    }
-  }, []);
+   const loadMeals = async () => {
+    const data = await getMeals();
+    setMeals(data);
+    console.log('Loaded meals:', data);
+  };
 
   useFocusEffect(
-      loadMeals,
+    useCallback(() => {
+      loadMeals();
+    }, []),
   );
+
 
   return (
     <ScrollView style={globalStyles.container}>
       <Text style={globalStyles.title}>MacroZone</Text>
       <HomeHeader />
       <MacroGrid meals={meals}/>
-      <RecentMeals meals={meals} />
+      <RecentMeals meals={meals} onDelete={loadMeals} />
     </ScrollView>
   );
 }
