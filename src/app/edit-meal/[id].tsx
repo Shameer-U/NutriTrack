@@ -1,7 +1,8 @@
+import { getMeal } from '@/storage/meals';
 import { colors, globalStyles } from '@/styles/global';
 import * as Haptics from 'expo-haptics';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     Alert,
     StyleSheet,
@@ -40,6 +41,19 @@ export default function EditMealScreen() {
 
     router.push('/');
   };
+
+  const loadMeal = async (id: string) => {
+    const meal = await getMeal(id);
+    setName(meal.name);
+    setCalories(String(meal.calories));
+    setProtein(String(meal.protein));
+    setCarbs(String(meal.carbs));
+    setFat(String(meal.fat));
+  }
+
+  useEffect(() => {
+     loadMeal(id);
+  }, [])
 
   return (
     <View style={globalStyles.container}>
