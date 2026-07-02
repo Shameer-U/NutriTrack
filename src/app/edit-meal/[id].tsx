@@ -24,7 +24,7 @@ export default function EditMealScreen() {
   const [carbs, setCarbs] = useState('');
   const [fat, setFat] = useState('');
 
-  const handleAddMeal = async () => {
+  const handleUpdateMeal = async () => {
     if (!name || !calories) {
       Alert.alert('Error', 'Please enter a meal name and calories.');
       return;
@@ -72,9 +72,9 @@ export default function EditMealScreen() {
         gap: 10,
         alignItems: "center"
       }}>
-      <Pressable onPress={() => router.back()}>
-        <Ionicons name='arrow-back' size={25} color={"#fff"} />
-          </Pressable>
+        <Pressable onPress={() => router.back()}>
+          <Ionicons name='arrow-back' size={25} color={"#fff"} />
+        </Pressable>
         <Text style={globalStyles.title}>Edit Meal</Text>
       </View>
 
@@ -122,7 +122,7 @@ export default function EditMealScreen() {
         />
       </View>
 
-      <TouchableOpacity style={styles.button} onPress={handleAddMeal}>
+      <TouchableOpacity style={styles.button} onPress={handleUpdateMeal}>
         <Text style={styles.buttonText}>Update Meal</Text>
       </TouchableOpacity>
     </View>
