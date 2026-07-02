@@ -11,6 +11,7 @@ export default function AllMealsScreen() {
   const loadMeals = async () => {
     const data = await getMeals();
     setMeals(data);
+    console.log('Loaded meals:', data);
   };
 
   const handleClearAll = async () => {

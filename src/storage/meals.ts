@@ -8,6 +8,7 @@ export type Meal = {
   carbs: number;
   fat: number;
   createdAt: string;
+  updatedAt?: string;
 };
 
 const MEALS_KEY = 'meals';
@@ -45,3 +46,15 @@ export const getMeal = async (id: string): Promise<Meal> => {
   const filtered = meals.filter((meal) => meal.id === id);
   return filtered[0] ?? [];
 } 
+
+export const updateMeal =  async (editedMeal: Omit<Meal, 'createdAt'>): Promise<void> => {
+   const meals = await getMeals();
+   const editedMealIndex = meals.findIndex((meal) => meal.id === editedMeal.id);
+   const updatedMeal = {
+    ...meals[editedMealIndex],
+    ...editedMeal,
+    updatedAt: new Date().toISOString()
+   }
+   meals[editedMealIndex] = updatedMeal;
+  await AsyncStorage.setItem(MEALS_KEY, JSON.stringify(meals));
+}

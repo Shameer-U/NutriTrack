@@ -14,7 +14,6 @@ export default function HomeScreen() {
    const loadMeals = async () => {
     const data = await getMeals();
     setMeals(data);
-    console.log('Loaded meals:', data);
   };
 
   useFocusEffect(
@@ -27,7 +26,7 @@ export default function HomeScreen() {
   return (
     <ScrollView style={globalStyles.container}>
       <View style={globalStyles.header}>
-        <Text style={globalStyles.title}>MacroZone</Text>
+        <Text style={globalStyles.title}>NutriZone</Text>
         <ShareButton meals={meals} />
       </View>
       <HomeHeader />

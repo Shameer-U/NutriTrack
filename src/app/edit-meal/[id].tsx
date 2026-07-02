@@ -1,4 +1,4 @@
-import { getMeal } from '@/storage/meals';
+import { getMeal, updateMeal } from '@/storage/meals';
 import { colors, globalStyles } from '@/styles/global';
 import * as Haptics from 'expo-haptics';
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -14,7 +14,6 @@ import {
 
 export default function EditMealScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  console.log("id", id)
   const router = useRouter();
   const [name, setName] = useState('');
   const [calories, setCalories] = useState('');
@@ -28,6 +27,14 @@ export default function EditMealScreen() {
       return;
     }
 
+    await updateMeal({
+          id,
+          name,
+          calories: Number(calories),
+          protein: Number(protein) || 0,
+          carbs: Number(carbs) || 0,
+          fat: Number(fat) || 0,
+        });
 
     setName('');
     setCalories('');
@@ -35,11 +42,11 @@ export default function EditMealScreen() {
     setCarbs('');
     setFat('');
 
-    Alert.alert('Success', 'Meal added successfully!');
+    Alert.alert('Success', 'Meal updated successfully!');
 
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 
-    router.push('/');
+    router.back();
   };
 
   const loadMeal = async (id: string) => {
