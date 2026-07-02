@@ -1,16 +1,19 @@
 import { getMeal, updateMeal } from '@/storage/meals';
 import { colors, globalStyles } from '@/styles/global';
+import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import {
-    Alert,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  Alert,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
 } from 'react-native';
+
 
 export default function EditMealScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -64,7 +67,16 @@ export default function EditMealScreen() {
 
   return (
     <View style={globalStyles.container}>
-      <Text style={globalStyles.title}>Edit Meal</Text>
+      <View style={{
+        flexDirection: 'row',
+        gap: 10,
+        alignItems: "center"
+      }}>
+      <Pressable onPress={() => router.back()}>
+        <Ionicons name='arrow-back' size={25} color={"#fff"} />
+          </Pressable>
+        <Text style={globalStyles.title}>Edit Meal</Text>
+      </View>
 
       <TextInput
         style={styles.input}
